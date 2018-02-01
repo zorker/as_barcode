@@ -1160,7 +1160,7 @@ THE SOFTWARE.
     is
       t_p1 pls_integer;
       t_p2 pls_integer;
-/* Table 7 — Number of symbol characters and input data capacity for QR Code 2005
+/* Table 7 Â— Number of symbol characters and input data capacity for QR Code 2005
 Number of data codewords,
 Data capacity Numeric,
 Data capacity Alphanumeric,
@@ -2480,8 +2480,10 @@ dbms_output.put_line( 'padding:' || mod( t_bil, t_wordsize ) );
     t_img := barcode( p_val, p_type, p_parm );
     htp.init;
     owa_util.mime_header( 'image/png', false );
-    htp.p( 'Content-length: ' || utl_raw.length( t_img ) );
-    htp.p( 'Content-Disposition: : inline;' );
+    --htp.p( 'Content-Disposition: attachment; filename="qr-code.png"' );
+    --htp.p( 'Content-length: ' || utl_raw.length( t_img ) );
+    htp.p( 'Content-Disposition: inline' );
+    htp.p( 'Content-Transfer-Encoding: binary' );
     htp.p( 'Cache-Control: no-store, no-cache, must-revalidate' );
     owa_util.http_header_close;
     wpg_docload.download_file( p_blob => t_img );
